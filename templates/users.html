@@ -7,7 +7,7 @@
     <body>
         <div id="contents">
             <p>{{props.msg}}</p>
-            <table>
+            <table border="3" style="border-collapse: collapse; border-color: navy">
                 <tr>
                     <th>ID</th>
                     <th>Name</th>
@@ -17,6 +17,8 @@
                     <td><a href="./users/{{user[0]}}">{{user[0]}}</a></td>
                     <td>{{user[1]}}</td>
                 </tr>
+                {% else %}
+                    <td>ユーザが登録されていません</td>
                 {% endfor %}
             </table>
         </div>
