@@ -17,7 +17,7 @@ db = MySQLClient(**dns)
 # Webページとしてのルーティングルール
 app = Flask(__name__)
 
-# APIのBlueprint作成,<http://host/api>以下のものはここのルールで処理される
+# RESTfulAPIのBlueprint作成,<http://host/api>以下のものはここのルールで処理される
 api = Blueprint('api',__name__,url_prefix='/api')
 
 # ------------------------------------------------------------------
