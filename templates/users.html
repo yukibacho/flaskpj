@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>{{props.title}}</title>
+    </head>
+    <body>
+        <div id="contents">
+            <p>{{props.msg}}</p>
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                </tr>
+                {% for user in users %}
+                <tr>
+                    <td><a href="./users/{{user[0]}}">{{user[0]}}</a></td>
+                    <td>{{user[1]}}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <hr>
+        <a href="/">Home</a>
+    </body>
+</html>
