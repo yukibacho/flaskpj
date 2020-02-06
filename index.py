@@ -54,15 +54,21 @@ def not_found(error):
     return redirect(url_for('main'))
 
 # ------------------------------------------------------------------
-@api.route('/hello')
+@app.route('/api/hello')
 def helloget():
     return jsonify({'message':'Hello World.'})
 
-@api.route('/users')
+@app.route('/apis/users')
 def usersget():
     stmt = 'SELECT * FROM USER_TBL'
     users = db.query(stmt)
-    return jsonify({'users':[user.to_dict() for user in users]})
+    json = {
+        "users" : [{
+            "ID" : user[0],
+            "Name" : user[1]
+        } for user in users]
+    }
+    return jsonify(json)
 
 
 # エラーのハンドリング errorhandler(xxx)を指定、複数指定可能
