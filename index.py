@@ -17,9 +17,6 @@ db = MySQLClient(**dns)
 # Webページとしてのルーティングルール
 app = Flask(__name__)
 
-# RESTfulAPIのBlueprint作成,<http://host/api>以下のものはここのルールで処理される
-api = Blueprint('api',__name__,url_prefix='/api')
-
 # ------------------------------------------------------------------
 @app.route("/")
 def main():
@@ -58,30 +55,18 @@ def not_found(error):
 def helloget():
     return jsonify({'message':'Hello World.'})
 
-@app.route('/apis/users')
+@app.route('/api/users')
 def usersget():
     stmt = 'SELECT * FROM USER_TBL'
     users = db.query(stmt)
-    json = {
-        "users" : [{
-            "ID" : user[0],
-            "Name" : user[1]
+    userj = [{
+            'ID':user[0],
+            'Name':user[1] 
         } for user in users]
+    json = {
+        'users': userj
     }
     return jsonify(json)
-
-
-# エラーのハンドリング errorhandler(xxx)を指定、複数指定可能
-# ここでは400,404をハンドリングする
-@api.errorhandler(400)
-@api.errorhandler(404)
-def error_handler(error):
-    # error.code: HTTPステータスコード
-    # error.description: abortで設定したdict型
-    return jsonify({'error': {
-        'code': error.description['code'],
-        'message': error.description['message']
-    }}), error.code
 # ------------------------------------------------------------------
 
 if __name__ == '__main__':
