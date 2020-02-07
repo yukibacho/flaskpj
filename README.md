@@ -16,7 +16,7 @@ Docker,Pythonともに初心者なのでプルリク等気軽にお願い致し�
 >クローンしたディレクトリに移動し、<br>
 $docker-compose up -d
 
-~docker-composeを使用しない例~<br>
+--docker-composeを使用しない例--<br>
 (2)ローカルのPowerShellにてMySQLコンテナのイメージをプル<br>
 >$docker pull mysql<br>
 
