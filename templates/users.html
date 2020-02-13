@@ -11,11 +11,19 @@
                 <tr>
                     <th>ID</th>
                     <th>Name</th>
+                    <th>操作</th>
                 </tr>
                 {% for user in users %}
                 <tr>
                     <td><a href="./users/{{user[0]}}">{{user[0]}}</a></td>
                     <td>{{user[1]}}</td>
+                    
+                    <td>
+                        <a href="/api/users/{{user[0]}}">
+                            <button type="button">削除</button>
+                        </a>
+                    </td>
+                    
                 </tr>
                 {% endfor %}
             </table>
