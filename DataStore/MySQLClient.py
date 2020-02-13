@@ -8,6 +8,9 @@ class MySQLClient:
     def _open(self):
         self.dbh = MySQLdb.Connection(**self.dns)
 
+    def _commit(self):
+        self.dbh.commit()
+
     def _close(self):
         self.dbh.close()
 
@@ -23,3 +26,11 @@ class MySQLClient:
         cursor.close()
         self._close()
         return data
+
+    def delquery(self,stmt):
+        self._open()
+        cursor = self.dbh.cursor()
+        cursor.execute(stmt)
+        self._commit()
+        cursor.close()
+        self._close()
