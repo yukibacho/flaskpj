@@ -67,6 +67,13 @@ def usersget():
         'users': userj
     }
     return jsonify(json)
+
+@app.route('/api/users/<int:id>')
+def userdel(id):
+    stmt =  'DELETE FROM USER_TBL WHERE ID = ' + str(id)
+    print(stmt)
+    user = db.delquery(stmt)
+    return redirect(url_for('.users'))
 # ------------------------------------------------------------------
 
 if __name__ == '__main__':
