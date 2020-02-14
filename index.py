@@ -42,8 +42,14 @@ def users():
 def user(id):
     props = {'title': 'User Information', 'msg': 'User Information'}
     stmt = 'SELECT * FROM USER_TBL WHERE ID = ' + str(id)
-    user = db.query(stmt, id, prepared=False)
+    user = db.query(stmt)
     html = render_template('user.html', props=props,user=user[0])
+    return html
+
+@app.route('/userinsert')
+def userinsert():
+    props = {'title': 'User Insert Form', 'msg': 'User Insert'}
+    html = render_template('userinsert.html', props=props)
     return html
 
 @app.errorhandler(404)
@@ -72,7 +78,14 @@ def usersget():
 def userdel(id):
     stmt =  'DELETE FROM USER_TBL WHERE ID = ' + str(id)
     print(stmt)
-    user = db.delquery(stmt)
+    db.delquery(stmt)
+    return redirect(url_for('.users'))
+
+@app.route('/api/users/<int:id>/<name>/<gender>')
+def useradd(id,name,gender):
+    stmt = 'INSERT INTO USER_TBL VALUES (' + str(id) + ",'" + name + "','" + gender + "')"
+    print(stmt)
+    db.delquery(stmt)
     return redirect(url_for('.users'))
 # ------------------------------------------------------------------
 
